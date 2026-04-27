@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eco Product Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Eco Product Finder for Local Businesses</h1>
+      <p>
+        Search for the plastic product you currently buy (for example:
+        <em>plastic forks and spoons</em>) and get eco-friendly alternatives.
+      </p>
+
+      <form method="GET" action="/" class="search-form">
+        <input
+          type="text"
+          name="q"
+          value="{{ query }}"
+          placeholder="Search products, e.g. plastic forks and spoons"
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      {% if searched %}
+        <section class="results">
+          <h2>Results for "{{ query }}"</h2>
+
+          {% if options %}
+            {% for option in options %}
+              <article class="card">
+                <h3>{{ option.company }} ({{ option.country }})</h3>
+                <p><strong>Replaces:</strong> {{ option.replaces | join(', ') }}</p>
+                <p><strong>Material:</strong> {{ option.materials | join(', ') }}</p>
+                <p>{{ option.notes }}</p>
+                <a href="{{ option.website }}" target="_blank" rel="noopener noreferrer">Visit company website</a>
+              </article>
+            {% endfor %}
+          {% else %}
+            <p class="empty">
+              No exact matches yet. Try searching with broader words like
+              "plastic cutlery", "packaging", or "foam packaging".
+            </p>
+          {% endif %}
+        </section>
+      {% endif %}
+    </main>
+  </body>
+</html>
