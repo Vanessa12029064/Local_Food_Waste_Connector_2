@@ -14,6 +14,25 @@
         Category: <strong>{{ selected_label }}</strong>. Search for specific products, materials, or company names.
       </p>
 
+      <section class="quick-start">
+        <h2>Not sure where to begin?</h2>
+        <p>Start with a focus area before searching in detail.</p>
+        <div class="idea-grid">
+          <a class="idea-card" href="{{ url_for('catalog', category='furniture') }}">
+            <h3>Furniture</h3>
+            <span>Desks, seating, mattresses →</span>
+          </a>
+          <a class="idea-card" href="{{ url_for('catalog', category='plastic-materials') }}">
+            <h3>Plastic Alternatives</h3>
+            <span>Packaging films, bags, and more →</span>
+          </a>
+          <a class="idea-card" href="{{ url_for('catalog', category='clean-power') }}">
+            <h3>Energy</h3>
+            <span>Solar and backup clean power →</span>
+          </a>
+        </div>
+      </section>
+
       <form method="GET" action="/catalog" class="search-form">
         <select name="category">
           <option value="">All Categories</option>
