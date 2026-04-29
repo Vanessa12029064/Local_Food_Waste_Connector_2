@@ -3,50 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eco Product Finder</title>
+    <title>Eco Product Finder | Catalog</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   </head>
   <body>
     <main class="container">
-      <h1>Eco Product Finder for Local Businesses</h1>
+      <p><a href="{{ url_for('home') }}">← Back to Home</a></p>
+      <h1>Eco Product Catalog</h1>
       <p>
-        Search for the plastic product you currently buy (for example:
-        <em>plastic forks and spoons</em>) and get eco-friendly alternatives.
+        Category: <strong>{{ selected_label }}</strong>. Search for specific products, materials, or company names.
       </p>
 
-      <form method="GET" action="/" class="search-form">
+      <form method="GET" action="/catalog" class="search-form">
+        <select name="category">
+          <option value="">All Categories</option>
+          {% for category_key, category_name in categories.items() %}
+            <option value="{{ category_key }}" {% if category_key == selected_category %}selected{% endif %}>{{ category_name }}</option>
+          {% endfor %}
+        </select>
         <input
           type="text"
           name="q"
           value="{{ query }}"
-          placeholder="Search products, e.g. plastic forks and spoons"
-          required
+          placeholder="Search products, e.g. compostable cutlery or solar backup"
         />
         <button type="submit">Search</button>
       </form>
 
-      {% if searched %}
-        <section class="results">
-          <h2>Results for "{{ query }}"</h2>
+      <section class="results">
+        <h2>Suppliers ({{ options | length }})</h2>
 
-          {% if options %}
-            {% for option in options %}
-              <article class="card">
-                <h3>{{ option.company }} ({{ option.country }})</h3>
-                <p><strong>Replaces:</strong> {{ option.replaces | join(', ') }}</p>
-                <p><strong>Material:</strong> {{ option.materials | join(', ') }}</p>
-                <p>{{ option.notes }}</p>
-                <a href="{{ option.website }}" target="_blank" rel="noopener noreferrer">Visit company website</a>
-              </article>
-            {% endfor %}
-          {% else %}
-            <p class="empty">
-              No exact matches yet. Try searching with broader words like
-              "plastic cutlery", "packaging", or "foam packaging".
-            </p>
-          {% endif %}
-        </section>
-      {% endif %}
+        {% if options %}
+          {% for option in options %}
+            <article class="card">
+              <h3>{{ option.company }} ({{ option.country }})</h3>
+              <p><strong>Category:</strong> {{ categories[option.category] }}</p>
+              <p><strong>Replaces:</strong> {{ option.replaces | join(', ') }}</p>
+              <p><strong>Material:</strong> {{ option.materials | join(', ') }}</p>
+              <p>{{ option.notes }}</p>
+              <a href="{{ option.website }}" target="_blank" rel="noopener noreferrer">Visit company website</a>
+            </article>
+          {% endfor %}
+        {% else %}
+          <p class="empty">
+            No matches found. Try broader keywords like "packaging", "furniture", or "clean power".
+          </p>
+        {% endif %}
+      </section>
     </main>
   </body>
 </html>

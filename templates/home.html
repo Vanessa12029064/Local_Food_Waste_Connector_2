@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eco Product Finder | Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="hero">
+        <h1>Find Eco-Friendly Products for Your Business</h1>
+        <p>
+          Start with a product category, then browse recommended suppliers and search for specific alternatives.
+        </p>
+      </section>
+
+      <section>
+        <h2>Choose a category</h2>
+        <div class="category-grid">
+          {% for category_key, category_name in categories.items() %}
+            <a class="category-card" href="{{ url_for('catalog', category=category_key) }}">
+              <h3>{{ category_name }}</h3>
+              <span>Browse suppliers →</span>
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+
+      <p class="all-link"><a href="{{ url_for('catalog') }}">View full catalog</a></p>
+    </main>
+  </body>
+</html>
