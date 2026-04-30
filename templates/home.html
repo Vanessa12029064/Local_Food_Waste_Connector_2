@@ -3,31 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eco Product Finder | Home</title>
+    <title>Local Food Waste Connector | Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   </head>
   <body>
     <main class="container">
       <section class="hero">
-        <h1>Find Eco-Friendly Products for Your Business</h1>
+        <h1>Local Food Waste Connector</h1>
         <p>
-          Start with a product category, then browse recommended suppliers and search for specific alternatives.
+          Scroll down to choose a material type. When you click one, you'll jump to search and use our current supplier search system.
+        </p>
+        <p>
+          <a class="search-icon-link" href="{{ url_for('catalog') }}#search-area" aria-label="Go to search">
+            🔍 Open Search
+          </a>
         </p>
       </section>
 
       <section>
-        <h2>Choose a category</h2>
+        <h2>Browse by material or product type</h2>
         <div class="category-grid">
-          {% for category_key, category_name in categories.items() %}
-            <a class="category-card" href="{{ url_for('catalog', category=category_key) }}">
-              <h3>{{ category_name }}</h3>
-              <span>Browse suppliers →</span>
-            </a>
-          {% endfor %}
+          <a class="category-card" href="{{ url_for('catalog', category='furniture') }}#search-area">
+            <h3>Furniture</h3>
+            <span>Find furniture alternatives →</span>
+          </a>
+          <a class="category-card" href="{{ url_for('catalog', category='textiles') }}#search-area">
+            <h3>Fabrics</h3>
+            <span>Find textile and fabric options →</span>
+          </a>
+          <a class="category-card" href="{{ url_for('catalog', category='plastic-materials') }}#search-area">
+            <h3>Plastic</h3>
+            <span>Find plastic alternatives →</span>
+          </a>
+          <a class="category-card" href="{{ url_for('catalog', category='silverware') }}#search-area">
+            <h3>Cutlery</h3>
+            <span>Find compostable cutlery options →</span>
+          </a>
         </div>
       </section>
-
-      <p class="all-link"><a href="{{ url_for('catalog') }}">View full catalog</a></p>
     </main>
   </body>
 </html>

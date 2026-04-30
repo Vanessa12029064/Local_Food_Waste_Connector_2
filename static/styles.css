@@ -4,6 +4,10 @@
   color: #102a1f;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background: linear-gradient(180deg, #eefaf2 0%, #f9fcfa 50%, #ffffff 100%);
@@ -30,6 +34,15 @@ h3 {
   margin-bottom: 1.25rem;
 }
 
+.search-icon-link {
+  display: inline-block;
+  background: #0b6a41;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+}
+
 .category-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -53,15 +66,22 @@ h3 {
   border-color: #9ccfb4;
 }
 
-.all-link {
-  margin-top: 1.2rem;
+.search-panel {
+  background: #ffffff;
+  border: 1px solid #cde6d7;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1.25rem 0;
+}
+
+.search-heading {
+  margin-top: 0;
 }
 
 .search-form {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin: 1.25rem 0;
 }
 
 input,
