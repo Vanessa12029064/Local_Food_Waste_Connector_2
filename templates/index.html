@@ -3,32 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eco Product Finder | Catalog</title>
+    <title>Local Food Waste Connector | Search Catalog</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   </head>
   <body>
     <main class="container">
       <p><a href="{{ url_for('home') }}">← Back to Home</a></p>
-      <h1>Eco Product Catalog</h1>
+      <h1>Local Food Waste Connector Search</h1>
       <p>
         Category: <strong>{{ selected_label }}</strong>. Search for specific products, materials, or company names.
       </p>
 
-      <form method="GET" action="/catalog" class="search-form">
-        <select name="category">
-          <option value="">All Categories</option>
-          {% for category_key, category_name in categories.items() %}
-            <option value="{{ category_key }}" {% if category_key == selected_category %}selected{% endif %}>{{ category_name }}</option>
-          {% endfor %}
-        </select>
-        <input
-          type="text"
-          name="q"
-          value="{{ query }}"
-          placeholder="Search products, e.g. compostable cutlery or solar backup"
-        />
-        <button type="submit">Search</button>
-      </form>
+      <section id="search-area" class="search-panel">
+        <h2 class="search-heading">🔍 Search</h2>
+        <form method="GET" action="/catalog" class="search-form">
+          <select name="category">
+            <option value="">All Categories</option>
+            {% for category_key, category_name in categories.items() %}
+              <option value="{{ category_key }}" {% if category_key == selected_category %}selected{% endif %}>{{ category_name }}</option>
+            {% endfor %}
+          </select>
+          <input
+            type="text"
+            name="q"
+            value="{{ query }}"
+            placeholder="Search products, e.g. compostable cutlery or solar backup"
+          />
+          <button type="submit">Search</button>
+        </form>
+      </section>
 
       <section class="results">
         <h2>Suppliers ({{ options | length }})</h2>
